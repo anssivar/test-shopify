@@ -1,19 +1,19 @@
-<!-- START: Nuvoo added block 16122025 -->
-{% if localization.available_countries.size > 1 %}
-  {% form 'localization', id: 'HeaderLocalizationForm', class: 'localization-form' %}
-    <label for="HeaderCountry" class="visually-hidden">Country/region</label>
-    <select id="HeaderCountry" name="country_code" onchange="this.form.submit()">
-      {% for country in localization.available_countries %}
+<!-- START: Nuvoo added block 16122025 (Åland excluded) -->
+{% assign excluded_countries = 'AX' | split: ',' %}
+
+{% form 'localization', id: 'HeaderLocalizationForm' %}
+  <select name="country_code" onchange="this.form.submit()">
+    {% for country in localization.available_countries %}
+      {% unless excluded_countries contains country.iso_code %}
         <option value="{{ country.iso_code }}"
           {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
-          {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+          {{ country.name }} ({{ country.currency.iso_code }})
         </option>
-      {% endfor %}
-    </select>
-  {% endform %}
-{% endif %}
-<!-- END:  Nuvoo added block 16122025 -->
-
+      {% endunless %}
+    {% endfor %}
+  </select>
+{% endform %}
+<!-- END:  Nuvoo added block 16122025 (Åland excluded) -->
 {%- for block in section.blocks -%}
   {%- case block.type -%}
     {%- when 'announcement' -%}
