@@ -1,4 +1,5 @@
 <!-- START: Nuvoo added block 16122025 (Åland excluded) -->
+<div style="text-align:right">
 {% assign excluded_countries = 'AX' | split: ',' %}
 
 {% form 'localization', id: 'HeaderLocalizationForm' %}
@@ -13,6 +14,7 @@
     {% endfor %}
   </select>
 {% endform %}
+</div>
 <!-- END:  Nuvoo added block 16122025 (Åland excluded) -->
 {%- for block in section.blocks -%}
   {%- case block.type -%}
